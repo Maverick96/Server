@@ -1,2 +1,2 @@
 # Server
-Server using Node.js and Express
+Server created using Node.js and Express
