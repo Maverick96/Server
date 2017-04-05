@@ -1,11 +1,23 @@
 var express = require('express');
-var expressObj = express();         //Instaniating a express object
+//Instaniating a express object
+var app = express();         
+//loading router file to define routes for post method
+var receive = require('./receive');     
 
-//To deal with Get request
-expressObj['get']('/', function(req,res){
-   res.sendFile(__dirname + '/home.html');      //Sending a html file as response
+app.use('/',(req,res,next) => {
+    console.log('Time is ' + Date.now());
+    //When the middleware doesn't send back the response object, it must pass control using 'next()' 
+    next();
+});
+//To handle GET request
+app.get('/',(req,res,next) => {
+    //Sending a html file as response
+   res.sendFile(__dirname + '/home.html');
 });
 
-expressObj.listen('8080',() => {
+//Handles requests routed to '/receive'
+app.use('/receive',receive);        
+
+app.listen('8080',() => {
     console.log("Listening on Port 8080");
 });
