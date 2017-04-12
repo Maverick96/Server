@@ -20,6 +20,10 @@ function addToDataBase(req,res){
     //Storing the body content in 'user'
     const user = req.body;
     //Connect to database
+    if(user.Name == '' && user.Age == ''){
+        res.send('<h1>Input Some Values Ediot</h1>\n');
+    }
+    else {
     pg.connect(conString, (err,client,done) => {
         if(err){
             res.send('Connection Failed')
@@ -36,6 +40,7 @@ function addToDataBase(req,res){
             res.send("ADDED TO DATABASE");
         })
     })
+    }
 }
 
 module.exports = router;

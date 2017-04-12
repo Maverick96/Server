@@ -17,6 +17,8 @@ app.get('/',(req,res,next) => {
 
 //Handles requests routed to '/receive'
 app.use('/receive',receive);        
+var search = require('./search');
+app.use('/search',search);
 
 app.listen('8080',() => {
     console.log("Listening on Port 8080");
